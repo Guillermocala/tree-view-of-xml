@@ -1,5 +1,11 @@
 from tkinter import *
 from tkinter import ttk, messagebox
+import xml.etree.ElementTree as ET
+
+
+tree = ET.parse('escuela.xml')
+root = tree.getroot()
+print(root)
 
 class AppXmlInPy(ttk.Frame):
     def __init__(self, main_window):
@@ -24,8 +30,6 @@ class AppXmlInPy(ttk.Frame):
         self.my_course_c_id = ["Estudiante1c", "Estudiante2c", "Estudiante3c"]
         self.add_tree("Curso_c3", self.my_course_c, self.my_course_c_id)
         
-        
-        
         self.treeview.pack(fill = BOTH, expand = True)
         self.show_children()
         self.pack(fill = BOTH, expand = True)
@@ -37,6 +41,7 @@ class AppXmlInPy(ttk.Frame):
     def show_children(self):
         treeview_children = self.treeview.get_children()
         print(treeview_children)
+
 
 root = Tk()
 app = AppXmlInPy(root)
