@@ -1,11 +1,11 @@
 import xml.etree.ElementTree as ET
-tree = ET.parse('colegio.xml')
+tree = ET.parse('./xml/colegio.xml')
 root = tree.getroot()
 print(root.tag)
 primer_nivel = []
 segundo_nivel = []
 tercer_nivel = []
-
+"""
 for child in root:
     for item in child:
         for item2 in item:
@@ -23,4 +23,7 @@ for item in segundo_nivel:
 
 print("tercer nivel")
 for item in tercer_nivel:
-    print(item.tag)
+    print(item.tag)"""
+hola = root.findall("./grado_a/estudiante/nombre")
+for item in hola:
+    print(item.text)
