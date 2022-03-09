@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <colegio>
-    <grado_a>
+    <course name="course_a">
         <estudiante>
             <nombre>Juan</nombre>
             <apellido>Gomez</apellido>
@@ -19,8 +19,8 @@
             <edad>13</edad>
             <telefono>3002341234</telefono>
         </estudiante>
-    </grado_a>
-    <grado_b>
+    </course>
+    <course name="course_b">
         <estudiante>
             <nombre>Carolina</nombre>
             <apellido>Perez</apellido>
@@ -39,8 +39,8 @@
             <edad>12</edad>
             <telefono>3098763412</telefono>
         </estudiante>
-    </grado_b>
-    <grado_c>
+    </course>
+    <course name="course_c">
         <estudiante>
             <nombre>Camila</nombre>
             <apellido>Rodriguez</apellido>
@@ -59,5 +59,5 @@
             <edad>14</edad>
             <telefono>3024782322</telefono>
         </estudiante>
-    </grado_c>
+    </course>
 </colegio>

@@ -2,34 +2,35 @@ from tkinter import *
 from tkinter import ttk, messagebox
 import xml.etree.ElementTree as ET
 
-
-tree = ET.parse('./xml/colegio.xml')
-raiz = tree.getroot()
-
 class AppXmlInPy(ttk.Frame):
+
     def __init__(self, main_window):
+        
         super().__init__(main_window)
         main_window.title("XML viewer")
         main_window.geometry("500x500")
         self.treeview = ttk.Treeview(self)
-        
-        self.lista1 = raiz.findall("./")
-        print(self.lista1)
-
-        self.add_tree("", self.lista1)
-        
-        
+        "invocamos la raiz con el ET parse y el getroot()"
+        self.tree = ET.parse('./xml/colegio.xml')
+        self.raiz = self.tree.getroot()
+        "esa raiz se la pasamo a la funcion que dibujara el arbol"
+        self.insert_treeview(self.raiz)
+        "opciones para visualizar mejor el treeview"
         self.treeview.pack(fill = BOTH, expand = True)
         self.pack(fill = BOTH, expand = True)
-
-    def add_tree(self, parent, text):
-        for item in range(len(text)):
-            self.treeview.insert(parent, END, None, text=text[item].tag)
-
-    def show_children(self):
-        treeview_children = self.treeview.get_children()
-        print(treeview_children)
-
+    
+    def insert_treeview(self, raiz, parent=""):
+        "recorremos la raiz"
+        for child in raiz:
+            node_name = child.tag
+            item = self.treeview.insert(parent, END, None, text=node_name)
+            if len(child) > 0:
+                "si tiene hijos volvemos a invocar"
+                self.insert_treeview(child, parent=item)
+            else:
+                "si no tiene hijos solo insertamos pero con el text"
+                if(child.text != None):
+                    self.treeview.insert(item, END, None, text=child.text)
 
 root = Tk()
 app = AppXmlInPy(root)
