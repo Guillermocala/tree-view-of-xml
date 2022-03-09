@@ -3,8 +3,7 @@
 """
 
 from tkinter import *
-import tkinter as tk
-from tkinter import ttk, messagebox
+from tkinter import ttk
 import xml.etree.ElementTree as ET
 
 class AppXmlInPy(ttk.Frame):
@@ -14,13 +13,14 @@ class AppXmlInPy(ttk.Frame):
         super().__init__(main_window)
         main_window.title("XML viewer")
         main_window.geometry("500x500")
-        self.treeview = ttk.Treeview(self)
+        "el selectmode es para que solo deje selecciona 1 a la vez"
+        self.treeview = ttk.Treeview(self, selectmode=BROWSE)
         "invocamos la raiz con el ET parse y el getroot()"
-        self.tree = ET.parse('./xml/colegio.xml')
+        self.tree = ET.parse('./xml/breakfast_menu.xml')
         self.raiz = self.tree.getroot()
         "icons time!"
-        self.icon_folder = tk.PhotoImage(file="./icons/folder.png")
-        self.icon_file = tk.PhotoImage(file="./icons/file.png")
+        self.icon_folder = PhotoImage(file="./icons/folder.png")
+        self.icon_file = PhotoImage(file="./icons/file.png")
         "aqui insertamos el primer tag y lo guardamos como referencia para insertar lo demas"
         self.nodo_principal = self.treeview.insert("", END, None, text=self.raiz.tag, image=self.icon_folder)
         "esa raiz se la pasamos a la funcion que dibujara el arbol"
@@ -44,6 +44,6 @@ class AppXmlInPy(ttk.Frame):
                 if(child.text != None):
                     self.treeview.insert(item, END, None, text=child.text, image=self.icon_file)
 
-root = Tk()
-app = AppXmlInPy(root)
+main_window = Tk()
+app = AppXmlInPy(main_window)
 app.mainloop()
