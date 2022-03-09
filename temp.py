@@ -4,4 +4,3 @@ tree = ET.parse('./xml/colegio.xml')
 root = tree.getroot()
 print("root tag: ", root.tag)
 
-print(root.find(''))
