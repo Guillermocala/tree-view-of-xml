@@ -1,4 +1,9 @@
+"""This code is based on Intermezzo coding style
+-check it out: https://docs.python.org/3/tutorial/controlflow.html#intermezzo-coding-style
+"""
+
 from tkinter import *
+import tkinter as tk
 from tkinter import ttk, messagebox
 import xml.etree.ElementTree as ET
 
@@ -11,10 +16,13 @@ class AppXmlInPy(ttk.Frame):
         main_window.geometry("500x500")
         self.treeview = ttk.Treeview(self)
         "invocamos la raiz con el ET parse y el getroot()"
-        self.tree = ET.parse('./xml/sample1.xml')
+        self.tree = ET.parse('./xml/colegio.xml')
         self.raiz = self.tree.getroot()
+        "icons time!"
+        self.icon_folder = tk.PhotoImage(file="./icons/folder.png")
+        self.icon_file = tk.PhotoImage(file="./icons/file.png")
         "aqui insertamos el primer tag y lo guardamos como referencia para insertar lo demas"
-        self.nodo_principal = self.treeview.insert("", END, None, text=self.raiz.tag)
+        self.nodo_principal = self.treeview.insert("", END, None, text=self.raiz.tag, image=self.icon_folder)
         "esa raiz se la pasamos a la funcion que dibujara el arbol"
         self.insert_treeview(self.raiz, parent=self.nodo_principal)
         "opciones para visualizar mejor el treeview"
@@ -25,7 +33,7 @@ class AppXmlInPy(ttk.Frame):
         "recorremos la raiz"
         for child in raiz:
             node_name = child.tag
-            item = self.treeview.insert(parent, END, None, text=node_name)
+            item = self.treeview.insert(parent, END, None, text=node_name, image=self.icon_folder)
             if len(child) > 0:
                 "si tiene hijos volvemos a invocar"
                 self.insert_treeview(child, parent=item)
@@ -34,7 +42,7 @@ class AppXmlInPy(ttk.Frame):
                 se supone que el ultimo nivel es donde se guardan los valores en el
                 campo de texto"""
                 if(child.text != None):
-                    self.treeview.insert(item, END, None, text=child.text)
+                    self.treeview.insert(item, END, None, text=child.text, image=self.icon_file)
 
 root = Tk()
 app = AppXmlInPy(root)
